@@ -2,12 +2,11 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-
 ##  Font Configuration
 ##  ------------------------------
 ##  Font for window titles. Will also be used by the bar unless a different font
 ##  is used in the bar {} block below.
-font pango:Ubuntu Nerd Font Complete Bold 6
+font pango:Iosevka Medium 8
 
 ##  Key Bindings
 ##  ------------------------------
@@ -59,7 +58,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 ## Change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+b layout toggle split
 
@@ -166,7 +165,7 @@ bar {
         position top
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
-        font pango: Ubuntu Mono Bold 9
+        font pango: Iosevka Bold 11
 
         colors {
                background $bg-color
@@ -178,7 +177,7 @@ bar {
 
 ##  start Rofi
 bindsym $mod+z exec rofi -show run
-
+bindsym $mod+s exec rofi -show ssh
 
 ##  i3lock Configuration (a screen locker)
 ##  ------------------------------
@@ -204,14 +203,33 @@ assign [class="Thunderbird"] $workspace7
 
 ##  Execute on login
 # exec rhythmbox
-exec compton -b
+exec compton --config /home/deo/.config/compton.conf -b
 exec emacs
 exec dropbox
 exec thunderbird
-# exec slack
+exec slack
 exec ibus-daemon
 exec --no-startup-id redshift-gtk
 exec python /home/deo/Workspace/pfu/pfu.py
 
 ##  Execute on reload
 # exec_always feh --bg-scale --no-xinerama ~/Wallpapers/background.jpg
+
+##  Disable window titlebars in order for i3-gaps to work correctly
+for_window [class="^.*"] border pixel 0
+
+##  i3-gaps Configuration
+##  ------------------------------
+##  inner|outer     -> inner gaps -- gaps between containers; outer gaps -- between screen edge and a container
+##                     Outer gaps are an addition to inner gaps.
+##  current|all     -> whether to modify the settings only for the current workspace, or for all
+##  set|plus|minus  -> allows for setting a new, fixed value or for making a relative change (in-/decrement)
+
+##  General Gaps
+gaps inner 8
+gaps outer 8
+
+##  Per-workspace Gaps
+# workspace workspace10 gaps inner 0
+# workspace workspace10 gaps outer 0
+
