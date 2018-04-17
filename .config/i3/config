@@ -15,63 +15,57 @@ font pango:Iosevka Medium 8
 ##  Mod4 is the windows key
 set $mod Mod4
 
-## Use Mouse+$mod to drag floating windows to their wanted position
+##  Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-## Start a terminal
+##  Start a terminal
 bindsym $mod+Return exec konsole
 
-## Kill the focused window
+##  Kill the focused window
 bindsym $mod+Shift+q kill
 
-## Change focus
+##  Change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-
-## Alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-## Move focused window
+##  Move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-
-## alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-## Split in horizontal orientation
-bindsym $mod+n Split h
-
-## Split in vertical orientation
+##  Split in horizontal/vertical direction
+bindsym $mod+n split h
 bindsym $mod+v split v
 
-## Enter fullscreen mode for the focused container
+##  Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-## Change container layout (stacked, tabbed, toggle split)
+##  Change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+b layout toggle split
 
-## Toggle tiling / floating
+##  Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# Change focus between tiling / floating windows
+##  Change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# Focus the parent container
+##  Focus the parent container
 bindsym $mod+a focus parent
 
-# Focus the child container
+## Focus the child container
 #bindsym $mod+d focus child
 
 # Set workspace variables
@@ -98,28 +92,24 @@ bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
 
-## Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace  $workspace1
-bindsym $mod+Shift+2 move container to workspace  $workspace2
-bindsym $mod+Shift+3 move container to workspace  $workspace3
-bindsym $mod+Shift+4 move container to workspace  $workspace4
-bindsym $mod+Shift+5 move container to workspace  $workspace5
-bindsym $mod+Shift+6 move container to workspace  $workspace6
-bindsym $mod+Shift+7 move container to workspace  $workspace7
-bindsym $mod+Shift+8 move container to workspace  $workspace8
-bindsym $mod+Shift+9 move container to workspace  $workspace9
-bindsym $mod+Shift+0 move container to workspace  $workspace10
+##  Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
 
-## Reload the configuration file
+##  Reload/Restart inplace/Exit
 bindsym $mod+Shift+c reload
-
-## Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-
-## Exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Really exit?' -b 'Yes, exit i3' 'i3-msg exit'"
 
-## Resize window
+##  Resize window
 bindsym $mod+r mode "resize"
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -138,6 +128,11 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+##  Scrot (screenshot utility) and open in Gimp
+bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+#   scrot & gimp - select window or rectangle
+#  bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 
 ##  Appearance
 ##  ------------------------------
@@ -165,7 +160,7 @@ bar {
         position top
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
-        font pango: Iosevka Bold 11
+        font pango: Iosevka Bold 10
 
         colors {
                background $bg-color
@@ -186,6 +181,12 @@ bindsym $mod+Shift+x exec i3lock --color "$bg-color"
 
 ##  Assign workspace output
 ##  ---------------------------
+workspace $workspace1 output HDMI-0
+workspace $workspace2 output HDMI-0
+workspace $workspace3 output HDMI-0
+workspace $workspace4 output HDMI-0
+workspace $workspace5 output HDMI-0
+workspace $workspace6 output DVI-0
 workspace $workspace7 output DVI-0
 workspace $workspace8 output DVI-0
 workspace $workspace9 output DVI-0
@@ -193,24 +194,24 @@ workspace $workspace10 output DVI-0
 
 ##  Assign workspace applications
 ##  ---------------------------
+##  - Use xprop to get the i3 window class
 assign [class="Emacs"] $workspace10
 assign [class="Vlc"] $workspace9
+assign [class="Slack"] $workspace8
 assign [class="Thunderbird"] $workspace7
-
+  
 
 ##  Execution
 ##  ------------------------------
 
 ##  Execute on login
-# exec rhythmbox
-exec compton --config /home/deo/.config/compton.conf -b
-exec emacs
+exec compton --config /home/deo/.config/compton/compton.conf -b
+exec python /home/deo/Workspace/pfu/pfu.py
+exec ibus-daemon
 exec dropbox
 exec thunderbird
 exec slack
-exec ibus-daemon
-exec --no-startup-id redshift-gtk
-exec python /home/deo/Workspace/pfu/pfu.py
+exec emacs
 
 ##  Execute on reload
 # exec_always feh --bg-scale --no-xinerama ~/Wallpapers/background.jpg
@@ -220,16 +221,29 @@ for_window [class="^.*"] border pixel 0
 
 ##  i3-gaps Configuration
 ##  ------------------------------
-##  inner|outer     -> inner gaps -- gaps between containers; outer gaps -- between screen edge and a container
+##  inner|outer     -> Inner gaps -- gaps between containers;
+##                     Outer gaps -- between screen edge and a container
 ##                     Outer gaps are an addition to inner gaps.
-##  current|all     -> whether to modify the settings only for the current workspace, or for all
+##  current|all     -> Modify only for the current workspace or for all of them
 ##  set|plus|minus  -> allows for setting a new, fixed value or for making a relative change (in-/decrement)
 
-##  General Gaps
-gaps inner 8
-gaps outer 8
+##  Global gaps size -- to be used on all workspaces
+##    - position the global default first, any following statements will override it
+gaps inner 0
+gaps outer 0
 
 ##  Per-workspace Gaps
-# workspace workspace10 gaps inner 0
-# workspace workspace10 gaps outer 0
+workspace $workspace1 gaps outer 30
+workspace $workspace1 gaps inner 100
+workspace $workspace2 gaps outer 30
+workspace $workspace2 gaps inner 100
+workspace $workspace3 gaps outer 30
+workspace $workspace3 gaps inner 20
+workspace $workspace8 gaps outer 100
 
+##  Gaps-altering key bindings 
+bindsym $mod+Mod1+1 gaps outer current set 30; gaps inner current set 100
+bindsym $mod+Mod1+2 gaps outer current set 30; gaps inner current set 50
+bindsym $mod+Mod1+3 gaps outer current set 30; gaps inner current set 20
+bindsym $mod+Mod1+0 gaps inner current set 0; gaps outer current set 0
+  
