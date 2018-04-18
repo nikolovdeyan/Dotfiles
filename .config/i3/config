@@ -169,7 +169,6 @@ bar {
 
 ##  Rofi Configuration (a program launcher)
 ##  ------------------------------
-
 ##  start Rofi
 bindsym $mod+z exec rofi -show run
 bindsym $mod+s exec rofi -show ssh
@@ -177,7 +176,6 @@ bindsym $mod+s exec rofi -show ssh
 ##  i3lock Configuration (a screen locker)
 ##  ------------------------------
 bindsym $mod+Shift+x exec i3lock --color "$bg-color"
-
 
 ##  Assign workspace output
 ##  ---------------------------
@@ -199,25 +197,21 @@ assign [class="Emacs"] $workspace10
 assign [class="Vlc"] $workspace9
 assign [class="Slack"] $workspace8
 assign [class="Thunderbird"] $workspace7
-  
 
 ##  Execution
 ##  ------------------------------
-
-##  Execute on login
-exec compton --config /home/deo/.config/compton/compton.conf -b
-exec python /home/deo/Workspace/pfu/pfu.py
+##  - Execute on login
+exec allow_rgb10_configs=false compton --config /home/deo/.config/compton/compton.conf -b
+# exec python /home/deo/Workspace/pfu/pfu.py
 exec ibus-daemon
 exec dropbox
 exec thunderbird
 exec slack
 exec emacs
 
-##  Execute on reload
-# exec_always feh --bg-scale --no-xinerama ~/Wallpapers/background.jpg
+##  - Execute on reload
+exec_always feh --bg-scale ~/Downloads/planes-background.jpg
 
-##  Disable window titlebars in order for i3-gaps to work correctly
-for_window [class="^.*"] border pixel 0
 
 ##  i3-gaps Configuration
 ##  ------------------------------
@@ -227,8 +221,11 @@ for_window [class="^.*"] border pixel 0
 ##  current|all     -> Modify only for the current workspace or for all of them
 ##  set|plus|minus  -> allows for setting a new, fixed value or for making a relative change (in-/decrement)
 
+##  Disable window titlebars in order for i3-gaps to work correctly
+for_window [class="^.*"] border pixel 0
+
 ##  Global gaps size -- to be used on all workspaces
-##    - position the global default first, any following statements will override it
+##   - position the global default first, any following statements will override it
 gaps inner 0
 gaps outer 0
 
