@@ -166,7 +166,6 @@ bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
 ##               background $bg-color
 ##        }
 ##}
-
 ##  Rofi Configuration (a program launcher)
 ##  ------------------------------
 ##  start Rofi
@@ -212,7 +211,7 @@ exec emacs
 ##  - Execute on reload
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always feh --bg-scale ~/Downloads/planes-background.jpg
-exec_always ibus-daemon
+exec_always ibus-daemon -r
 
 
 ##  i3-gaps Configuration
