@@ -55,10 +55,10 @@ set $workspace3 "3"
 set $workspace4 "4"
 set $workspace5 "5"
 set $workspace6 "6"
-set $workspace7 "7 "
-set $workspace8 "8 "
-set $workspace9 "9 "
-set $workspace10 "10 "
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9"
+set $workspace10 "10"
 
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
@@ -148,8 +148,8 @@ bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
 ##  Rofi Configuration (a program launcher)
 ##  ------------------------------
 ##  start Rofi
-bindsym $mod+z exec rofi -show run
-bindsym $mod+s exec rofi -show ssh
+bindsym $mod+z exec rofi -show drun -theme .config/rofi/current-theme .
+bindsym $mod+s exec rofi -show ssh -theme .config/rofi/current-theme .
 
 ##  i3lock Configuration (a screen locker)
 ##  ------------------------------
@@ -159,7 +159,7 @@ bindsym $mod+Shift+x exec i3lock --color "$bg-color"
 ##  Assign workspace applications
 ##  ---------------------------
 ##  - Use xprop to get the i3 window class
-assign [class="Emacs"] $workspace10
+# assign [class="Emacs"] $workspace10
 assign [class="Vlc"] $workspace9
 assign [class="Slack"] $workspace8
 assign [class="Thunderbird"] $workspace7
@@ -190,13 +190,8 @@ gaps inner 0
 gaps outer 0
 
 ##  Per-workspace Gaps
-workspace $workspace1 gaps outer 20
-workspace $workspace1 gaps inner 25
-workspace $workspace2 gaps outer 20
-workspace $workspace2 gaps inner 25
-workspace $workspace3 gaps outer 20
-workspace $workspace3 gaps inner 25
-workspace $workspace8 gaps outer 100
+# workspace $workspace1 gaps outer 0
+# workspace $workspace1 gaps inner 0
 
 ##  Gaps-altering key bindings 
 bindsym $mod+Mod1+1 gaps outer current set 30; gaps inner current set 100
