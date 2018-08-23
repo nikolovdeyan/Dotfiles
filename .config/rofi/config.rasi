@@ -1,7 +1,7 @@
 configuration {
 /*	modi: "window,run,ssh";*/
-	width: 60; 
-	lines: 10; 
+/*	width: 60; */
+/*	lines: 10; */
 /*	columns: 1;*/
 /*	font: "mono 12";*/
 /*	bw: 1;*/
@@ -137,5 +137,4 @@ configuration {
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
-/* @import "/usr/share/rofi/themes/arthur.rasi" */
 @import "/home/deo/.config/rofi/arthur_modified.rasi"

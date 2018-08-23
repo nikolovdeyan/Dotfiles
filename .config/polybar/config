@@ -1,34 +1,58 @@
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[settings]
+screenchange-reload = true
+
 ;; COLORS DEFINITION
 [colors]
-;; colors for objects representing the ground in the figure-ground relationship
-col_bg = ${xrdb:background}
-col_bg_accent = ${xrdb:color4}
-;; colors for text
-col_fg = ${xrdb:foreground}
-col_fg_accent = ${xrdb:color15}
-;; colors for objects representing the figure in the figure-ground relationship
-col_primary = ${xrdb:color12}
-col_secondary = ${xrdb:color12}
-col_alert = ${xrdb:color1}
-c_black_dark = ${xrdb:color0}
-
+background_dark = ${xrdb:color0}
+background_light = ${xrdb:color8}
+foreground_dark = ${xrdb:color7}
+foreground_light = ${xrdb:color15}
+red_dark = ${xrdb:color1}
+red_light = ${xrdb:color9}
+green_dark = ${xrdb:color2}
+green_light = ${xrdb:color10}
+yellow_dark = ${xrdb:color3}
+yellow_light = ${xrdb:color11}
+blue_dark = ${xrdb:color4}
+blue_light = ${xrdb:color12}
+magenta_dark = ${xrdb:color5}
+magenta_light = ${xrdb:color13}
+cyan_dark = ${xrdb:color6}
+cyan_light = ${xrdb:color14}
+;; additional colors
+;; accent_dark = ${colors.blue_dark}
+;; accent_light = ${colors.blue_light}
 
 ;; MAIN BAR
 ;; Compose the main bar for the primary monitor
 [bar/mainbar]
 monitor = ${env:MONITOR:HDMI-0}
 width = 100%
-height = 27
+height = 30
+spacing = 1
+offset-x = 0
+offset-y = 0
+radius-top = 0
+radius-bottom = 0
 fixed-center = true
 
-background = ${colors.col_bg}
-foreground = ${colors.col_fg}
+background = ${colors.background_dark}
+foreground = ${colors.foreground_dark}
 
 line-size = 3
-line-color = ${colors.col_bg_accent}
+line-color = ${colors.blue_dark}
+;; overline-size = 0
+;; overline-color = ${colors.background_dark}
+;; underline-size = 0
+;; underline-color = ${colors.background_dark}
 
-border-size = 1
-border-color = ${colors.col_bg_accent}
+border-top-size = 0
+border-bottom-size = 2
+border-color = ${colors.background_light}
 
 padding-left = 0
 padding-right = 2
@@ -36,7 +60,7 @@ padding-right = 2
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = fixed:pixelsize=10;1
+font-0 = FantasqueSansMono:pixelsize=12;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
@@ -45,7 +69,13 @@ modules-center = date
 modules-right = volume
 
 tray-position = right
-tray-padding = 1
+tray-padding = 2
+tray-detached = false
+;; tray-maxsize = 16
+;; tray-transparent = false
+;; tray-offset-x = 0
+;; tray-offset-y = 0
+tray-background = ${colors.background_light}
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -55,31 +85,33 @@ cursor-scroll = ns-resize
 [bar/auxbar]
 monitor = ${env:MONITOR:DVI-0}
 width = 100%
-height = 27
-fixed-center = false
+height = 30
+spacing = 0
+fixed-center = true
 
-background = ${colors.col_bg}
-foreground = ${colors.col_fg}
+background = ${colors.background_dark}
+foreground = ${colors.foreground_dark}
 
 line-size = 3
-line-color = ${colors.col_bg}
+line-color = ${colors.blue_light}
 
-border-size = 1
-border-color = ${colors.col_bg_accent}
+border-top-size = 0
+border-bottom-size = 2
+border-color = ${colors.background_light}
 
 padding-left = 0
-padding-right = 2
+padding-right = 0
 
-module-margin-left = 3
+module-margin-left = 0
 module-margin-right = 0
 
-font-0 = fixed:pixelsize=10;1
+font-0 = FantasqueSansMono:pixelsize=12;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = i3
 modules-center = date
-modules-right = memory cpu
+modules-right = memory cpu volume
 
 tray-position = none
 tray-padding = 0
@@ -87,7 +119,6 @@ tray-padding = 0
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-;; MODULES
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
@@ -98,18 +129,18 @@ wrapping-scroll = false
 pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = ${colors.col_fg}
-label-mode-background = ${colors.col_primary}
+label-mode-background = ${colors.background_light}
+label-mode-foreground = ${colors.foreground_dark}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
+label-focused-background = ${colors.blue_dark}
+label-focused-underline = ${colors.blue_dark}
+label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
@@ -119,139 +150,111 @@ label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = "CPU: "
-format-prefix-foreground = ${colors.col_fg}
-format-underline = ${colors.col_primary}
-label = %percentage:2%%
-
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.col_fg_accent}
-format-underline = ${colors.col_primary}
-label = %percentage_used%%
-
-[module/eth]
-type = internal/network
-interface = enp3s0
-interval = 3.0
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:30:...%
-
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix = ""
-format-prefix-foreground = ${colors.col_fg_accent}
-format-prefix-underline = ${colors.col_secondary}
-
-label-layout = %layout%
-label-layout-underline = ${colors.col_secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.col_secondary}
-label-indicator-underline = ${colors.col_secondary}
+label-urgent-background = ${colors.red_dark}
+label-urgent-padding = 2
 
 [module/filesystem]
 type = internal/fs
-interval = 25
+interval = 30
 
 mount-0 = /
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.col_fg_accent}
+label-unmounted-foreground = ${colors.foreground_dark}
 
-[module/bspwm]
-type = internal/bspwm
+[module/memory]
+type = internal/memory
 
-label-focused = %index%
-label-focused-background = ${colors.col_bg_accent}
-label-focused-underline= ${colors.col_primary}
-label-focused-padding = 2
+format = <label> <bar-used>
+format-padding = 2
+format-background = ${colors.background_light}
+format-foreground = ${colors.foreground_dark}
+format-underline = ${colors.blue_dark}
 
-label-occupied = %index%
-label-occupied-padding = 2
+label = RAM:
+label-font = 3
 
-label-urgent = %index%!
-label-urgent-background = ${colors.col_alert}
-label-urgent-padding = 2
+bar-used-width = 10
+bar-used-indicator = |
+bar-used-indicator-font = 4
+bar-used-indicator-foreground = ${colors.foreground_light}
+bar-used-fill = ─
+bar-used-fill-font = 4
+bar-used-fill-foreground = ${colors.foreground_light}
+bar-used-empty = ─
+bar-used-empty-font = 4
+bar-used-empty-foreground = ${colors.foreground_dark}
 
-label-empty = %index%
-label-empty-foreground = ${colors.col_fg_accent}
-label-empty-padding = 2
+[module/cpu]
+type = internal/cpu
+interval = 0.5
 
+format = <label> <ramp-coreload>
+format-background = ${colors.background_light}
+format-foreground = ${colors.foreground_dark}
+format-underline = ${colors.blue_dark}
+format-padding = 1
 
-format-connected-underline = ${colors.col_primary}
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.col_fg_accent}
-label-connected = %local_ip%
+label = CPU:
+label-font = 1
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.col_fg_accent}
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 5
+ramp-coreload-0-foreground = ${colors.foreground_dark}
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 5
+ramp-coreload-1-foreground = ${colors.foreground_dark}
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 5
+ramp-coreload-2-foreground = ${colors.foreground_dark}
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 5
+ramp-coreload-3-foreground = ${colors.yellow_dark}
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 5
+ramp-coreload-4-foreground = ${colors.yellow_dark}
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 5
+ramp-coreload-5-foreground = ${colors.red_dark}
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 5
+ramp-coreload-6-foreground = ${colors.red_dark}
+ramp-coreload-7 = █
+ramp-coreload-7-font = 5
+ramp-coreload-7-foreground = ${colors.red_dark}
 
 [module/date]
 type = internal/date
 interval = 5
 
-date = 
-date-alt = " %d.%m.%Y"
+label =  %time% %date%
 
+date =
+date-alt = " %d.%m.%Y"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
-format-prefix-foreground = ${colors.col_fg_accent}
-format-underline = ${colors.col_primary}
-
-label = %time% %date%
+format-prefix = " "
+format-padding = 1
+format-background = ${colors.background_light}
+format-foreground = ${colors.foreground_dark}
+format-prefix-foreground = ${colors.foreground_dark}
+format-underline = ${colors.blue_dark}
 
 [module/volume]
 type = internal/volume
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.col_fg}
+format-volume-padding = 3
+format-volume-background = ${colors.background_light}
+format-volume-foreground = ${colors.foreground_dark}
+format-volume-underline = ${colors.blue_dark}
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.col_fg_accent}
+format-muted-padding = 1
+format-muted-background = ${colors.red_dark}
+format-muted-foreground = ${colors.foreground_dark}
+
+label-volume = VOL:%percentage%
+label-volume-font = 1
 label-muted = sound muted
-
-bar-volume-width = 15
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.col_fg_accent}
-
-[settings]
-screenchange-reload = true
-
-[global/wm]
-margin-top = 0
-margin-bottom = 0
-
-; vim:ft=dosini
+label-muted-font = 1

@@ -17,12 +17,6 @@ configuration {
     display-combi:                  "";
     show-icons: true;
 }
-
-
-/**
- * User: Qball
- * Copyright: Dave Davenport
- */
 * {
     foreground:  #ffeedd;
     backlight:   #ccffeedd;
@@ -66,7 +60,7 @@ configuration {
     highlight:     underline bold #ffffff;
 
     transparent: rgba(0,0,0,0);
-    font: "Fantasque Sans Mono 18";
+    font: "Fantasque Sans Mono 15";
 }
 #window {
     location: center;
@@ -116,16 +110,16 @@ configuration {
     margin:     0px 0.3em 0em 0em ;
 }
 #listview {
-    padding: 8px;
-    border-radius: 0px 0px 10px 10px;
+    padding: 20px;
+    border-radius: 0px 0px 8px 8px;
     border-color: @foreground;
     border: 0px 2px 2px 2px;
     background-color: #1c1c1ccc;
     dynamic: false;
-    lines: 10;
+    lines: 6;
 }
 #element {
-    padding: 3px;
+    padding: 4px;
     vertical-align: 0.5;
 //    border: 2px;
     border-radius: 4px;
