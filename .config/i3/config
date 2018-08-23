@@ -9,7 +9,7 @@ font pango:Iosevka Medium 8
 ##  Mod4 is the windows key
 set $mod Mod4
 
-##  Use Mouse+$mod to drag floating windows to their wanted position
+##  Modal key to enable dragging of floating windows
 floating_modifier $mod
 
 ##  Start a terminal
@@ -122,55 +122,73 @@ mode "resize" {
 }
 
 ##  Scrot (screenshot utility) and open in Gimp
-# bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+#bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
 #   scrot & gimp - select window or rectangle
-#  bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+#bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+
 
 ##  Appearance
 ##  ------------------------------
 
 ##  Disable edge borders and indicator
-# hide_edge_borders both
+#hide_edge_borders both
 
-## ##  Set colors
-## set $bg-color             #2f343f
-## set $inactive-bg-color    #2f343f
-## set $text-color           #bbbbbb
-## set $inactive-text-color  #e53935
-## set $urgent-bg-color      #e53935
-## 
-## ##  Window appearance
-## ##                        Border                  Background              Text                    indicator
-## client.focused            $bg-color               $bg-color               $text-color             #00ff00
-## client.unfocused          $inactive-bg-color      $inactive-bg-color      $inactive-text-color    #00ff00
-## client.focused_inactive   $inactive-bg-color      $inactive-bg-color      $inactive-text-color    #00ff00
-## client.urgent             $urgent-bg-color        $urgent-bg-color        $text-color             #00ff00
+##  Get colors from .Xresources
+#set_from_resource $background_dark = color0
+#set_from_resource $background_light = color8
+#set_from_resource $foreground_dark = color7
+#set_from_resource $foreground_light = color15
+#set_from_resource $red_dark = color1
+#set_from_resource $red_light = color9
+#set_from_resource $green_dark = color2
+#set_from_resource $green_light = color10
+#set_from_resource $yellow_dark = color3
+#set_from_resource $yellow_light = color11
+#set_from_resource $blue_dark = color4
+#set_from_resource $blue_light = color12
+#set_from_resource $magenta_dark = color5
+#set_from_resource $magenta_light = color13
+#set_from_resource $cyan_dark = color6
+#set_from_resource $cyan_light = color14
+
+##  Assign colors to color variables
+#set $bg_focused $background_dark
+#set $bg_unfocused $background_light
+#set $bg_inactive $red_dark
+#set $bg_urgent $red_light
+#set $fg_focused $foreground_light
+#set $fg_unfocused $foreground_light
+#set $fg_urgent $red_light
+
+##  Window appearance
+##  Element               Border                  Background              Text                    Indicator
+#client.focused            $bg_focused             $bg_focused             $fg_focused             #00ff00
+#client.unfocused          $bg_unfocused           $bg_unfocused           $fg_unfocused           #00ff00
+#client.focused_inactive   $bg_inactive            $bg_inactive            $fg_unfocused           #00ff00
+#client.urgent             $bg_urgent              $bg_urgent              $fg_urgent              #00ff00
+
 
 ##  Rofi Configuration (a program launcher)
 ##  ------------------------------
-##  start Rofi
 bindsym $mod+z exec rofi -show drun -theme .config/rofi/current-theme .
 bindsym $mod+s exec rofi -show ssh -theme .config/rofi/current-theme .
 
 ##  i3lock Configuration (a screen locker)
 ##  ------------------------------
-bindsym $mod+Shift+x exec i3lock --color "$bg-color"
+#  bindsym $mod+Shift+x exec i3lock --color "$bg_unfocused"
 
 
 ##  Assign workspace applications
 ##  ---------------------------
 ##  - Use xprop to get the i3 window class
-# assign [class="Emacs"] $workspace10
-# assign [class="Vlc"] $workspace9
 assign [class="Slack"] $workspace8
 assign [class="Thunderbird"] $workspace7
-# assign [class="VirtualBox Machine"] $workspace6
 
 ##  Execution
 ##  ------------------------------
 ##  - Execute on login
-# exec allow_rgb10_configs=false compton --config /home/deo/.config/compton/compton.conf -b
 exec --no-startup-id compton --config /home/deo/.config/compton/compton.conf -b
+# exec --no-startup-id redshift-gtk
 exec ibus-daemon -r
 exec dropbox
 exec thunderbird

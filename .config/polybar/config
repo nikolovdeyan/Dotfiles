@@ -27,46 +27,53 @@ cyan_light = ${xrdb:color14}
 ;; accent_dark = ${colors.blue_dark}
 ;; accent_light = ${colors.blue_light}
 
-;; MAIN BAR
-;; Compose the main bar for the primary monitor
-[bar/mainbar]
-monitor = ${env:MONITOR:HDMI-0}
+
+;; BASE BAR
+;; Settings are inherited by all other bars
+[bar/base]
 width = 100%
 height = 30
-spacing = 1
+module-margin = 0
 offset-x = 0
 offset-y = 0
 radius-top = 0
 radius-bottom = 0
-fixed-center = true
-
 background = ${colors.background_dark}
 foreground = ${colors.foreground_dark}
-
 line-size = 3
-line-color = ${colors.blue_dark}
+line-color = ${colors.blue_light}
 ;; overline-size = 0
 ;; overline-color = ${colors.background_dark}
 ;; underline-size = 0
 ;; underline-color = ${colors.background_dark}
-
 border-top-size = 0
 border-bottom-size = 2
 border-color = ${colors.background_light}
 
-padding-left = 0
-padding-right = 2
-
-module-margin-left = 0
-module-margin-right = 0
-
 font-0 = FantasqueSansMono:pixelsize=12;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-1 = IosevkaSemibold:size=10;0
+font-2 = IosevkaMedium:size=10;1
+font-3 = IosevkaHeavy:size=11;1
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+;; MAIN BAR
+;; Compose the main bar for the primary monitor
+[bar/mainbar]
+inherit = bar/base
+monitor = ${env:MONITOR:HDMI-0}
 
 modules-left = i3
 modules-center = date
 modules-right = volume
+
+fixed-center = true
+
+padding-left = 0
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
 
 tray-position = right
 tray-padding = 2
@@ -77,47 +84,24 @@ tray-detached = false
 ;; tray-offset-y = 0
 tray-background = ${colors.background_light}
 
-cursor-click = pointer
-cursor-scroll = ns-resize
-
 ;; AUX BAR
 ;; Compose the auxiliary bar for the secondary monitor
 [bar/auxbar]
+inherit = bar/base
 monitor = ${env:MONITOR:DVI-0}
-width = 100%
-height = 30
-spacing = 0
-fixed-center = true
-
-background = ${colors.background_dark}
-foreground = ${colors.foreground_dark}
-
-line-size = 3
-line-color = ${colors.blue_light}
-
-border-top-size = 0
-border-bottom-size = 2
-border-color = ${colors.background_light}
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 0
-module-margin-right = 0
-
-font-0 = FantasqueSansMono:pixelsize=12;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
 
 modules-left = i3
 modules-center = date
 modules-right = memory cpu volume
 
-tray-position = none
-tray-padding = 0
+fixed-center = true
 
-cursor-click = pointer
-cursor-scroll = ns-resize
+padding-left = 0
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
+
+tray-position = none
 
 [module/i3]
 type = internal/i3
@@ -134,101 +118,121 @@ label-mode-foreground = ${colors.foreground_dark}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
+label-focused-font = 2
 label-focused-background = ${colors.blue_dark}
 label-focused-underline = ${colors.blue_dark}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
+label-unfocused-font = 2
 label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
+label-visible-font = 2
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
+label-urgent-font = 2
 label-urgent-background = ${colors.red_dark}
 label-urgent-padding = 2
+
 
 [module/filesystem]
 type = internal/fs
 interval = 30
 
 mount-0 = /
+mount-1 = /data
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = HDD: %mountpoint%: %percentage_free%
+label-mounted-font = 2
+label-mounted-foreground = ${colors.foreground_dark}
+label-mounted-underline = ${colors.blue_dark}
+
 label-unmounted = %mountpoint% not mounted
+label-unmounted-font = 2
 label-unmounted-foreground = ${colors.foreground_dark}
+label-unmounted-underline = ${colors.yellow_dark}
+
 
 [module/memory]
 type = internal/memory
+interval = 2
 
-format = <label> <bar-used>
-format-padding = 2
+format = <label> <ramp-used>
+format-padding = 1
 format-background = ${colors.background_light}
 format-foreground = ${colors.foreground_dark}
 format-underline = ${colors.blue_dark}
 
 label = RAM:
-label-font = 3
+label-font = 2
 
 bar-used-width = 10
 bar-used-indicator = |
-bar-used-indicator-font = 4
 bar-used-indicator-foreground = ${colors.foreground_light}
-bar-used-fill = ─
-bar-used-fill-font = 4
 bar-used-fill-foreground = ${colors.foreground_light}
-bar-used-empty = ─
-bar-used-empty-font = 4
 bar-used-empty-foreground = ${colors.foreground_dark}
+ramp-used-0 = ▁
+ramp-used-0-foreground = ${colors.foreground_dark}
+ramp-used-1 = ▂
+ramp-used-1-foreground = ${colors.foreground_dark}
+ramp-used-2 = ▃
+ramp-used-2-foreground = ${colors.foreground_dark}
+ramp-used-3 = ▄
+ramp-used-3-foreground = ${colors.yellow_dark}
+ramp-used-4 = ▅
+ramp-used-4-foreground = ${colors.yellow_dark}
+ramp-used-5 = ▆
+ramp-used-5-foreground = ${colors.yellow_dark}
+ramp-used-6 = ▇
+ramp-used-6-foreground = ${colors.red_dark}
+ramp-used-7 = █
+ramp-used-7-foreground = ${colors.red_dark}
+
 
 [module/cpu]
 type = internal/cpu
 interval = 0.5
 
 format = <label> <ramp-coreload>
+format-padding = 1
 format-background = ${colors.background_light}
 format-foreground = ${colors.foreground_dark}
 format-underline = ${colors.blue_dark}
-format-padding = 1
 
 label = CPU:
-label-font = 1
+label-font = 2
 
 ramp-coreload-0 = ▁
-ramp-coreload-0-font = 5
 ramp-coreload-0-foreground = ${colors.foreground_dark}
 ramp-coreload-1 = ▂
-ramp-coreload-1-font = 5
 ramp-coreload-1-foreground = ${colors.foreground_dark}
 ramp-coreload-2 = ▃
-ramp-coreload-2-font = 5
 ramp-coreload-2-foreground = ${colors.foreground_dark}
 ramp-coreload-3 = ▄
-ramp-coreload-3-font = 5
 ramp-coreload-3-foreground = ${colors.yellow_dark}
 ramp-coreload-4 = ▅
-ramp-coreload-4-font = 5
 ramp-coreload-4-foreground = ${colors.yellow_dark}
 ramp-coreload-5 = ▆
-ramp-coreload-5-font = 5
-ramp-coreload-5-foreground = ${colors.red_dark}
+ramp-coreload-5-foreground = ${colors.yellow_dark}
 ramp-coreload-6 = ▇
-ramp-coreload-6-font = 5
 ramp-coreload-6-foreground = ${colors.red_dark}
 ramp-coreload-7 = █
-ramp-coreload-7-font = 5
 ramp-coreload-7-foreground = ${colors.red_dark}
+
 
 [module/date]
 type = internal/date
 interval = 5
 
 label =  %time% %date%
+label-font = 2
 
 date =
 date-alt = " %d.%m.%Y"
@@ -242,19 +246,47 @@ format-foreground = ${colors.foreground_dark}
 format-prefix-foreground = ${colors.foreground_dark}
 format-underline = ${colors.blue_dark}
 
+
 [module/volume]
 type = internal/volume
 
-format-volume-padding = 3
-format-volume-background = ${colors.background_light}
-format-volume-foreground = ${colors.foreground_dark}
+format-volume = <label-volume><bar-volume>
 format-volume-underline = ${colors.blue_dark}
+format-muted-underline = ${colors.red_light}
 
-format-muted-padding = 1
-format-muted-background = ${colors.red_dark}
-format-muted-foreground = ${colors.foreground_dark}
+label-volume = VOL:
+label-volume-font = 2
+label-volume-padding = 1
+label-volume-background = ${colors.background_light}
+label-volume-foreground = ${colors.foreground_dark}
 
-label-volume = VOL:%percentage%
-label-volume-font = 1
-label-muted = sound muted
-label-muted-font = 1
+label-muted = VOL:       muted
+label-muted-font = 2
+label-muted-padding = 2
+label-muted-background = ${colors.red_dark}
+label-muted-foreground = ${colors.foreground_dark}
+
+bar-volume-width = 15
+bar-volume-gradient = false
+
+bar-volume-foreground-0 = ${colors.foreground_dark}
+bar-volume-foreground-1 = ${colors.foreground_dark}
+bar-volume-foreground-2 = ${colors.foreground_dark}
+bar-volume-foreground-3 = ${colors.yellow_dark}
+bar-volume-foreground-4 = ${colors.yellow_dark}
+bar-volume-foreground-5 = ${colors.red_dark}
+bar-volume-foreground-6 = ${colors.red_dark}
+
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-indicator-background = ${colors.background_light}
+bar-volume-indicator-foreground = ${colors.foreground_light}
+
+bar-volume-fill = ▬
+bar-volume-fill-font = 2
+bar-volume-fill-background = ${colors.background_light}
+
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground_dark}
+bar-volume-empty-background = ${colors.background_light}
