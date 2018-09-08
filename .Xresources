@@ -1,20 +1,20 @@
-!!#include "/home/deo/xcolors/citynight"
-#define COLOR0      #090e14
-#define COLOR8      #262626
-#define COLOR7      #A6A6A6
-#define COLOR15     #f6f7f9
-#define COLOR1      #593E3A
-#define COLOR9      #A6736C
-#define COLOR2      #315445
-#define COLOR10     #6CA68D
-#define COLOR3      #6F5E21
-#define COLOR11     #A6996C
-#define COLOR4      #21436F
-#define COLOR12     #6d86a7
-#define COLOR5      #6F4B73
-#define COLOR13     #A16CA6
-#define COLOR6      #5B708C
-#define COLOR14     #9DC2F2
+#include "/home/deo/.config/xcolors/the_cake_is_a_lie"
+!! #define COLOR0      #090e14
+!! #define COLOR8      #262626
+!! #define COLOR7      #A6A6A6
+!! #define COLOR15     #f6f7f9
+!! #define COLOR1      #593E3A
+!! #define COLOR9      #A6736C
+!! #define COLOR2      #315445
+!! #define COLOR10     #6CA68D
+!! #define COLOR3      #6F5E21
+!! #define COLOR11     #A6996C
+!! #define COLOR4      #21436F
+!! #define COLOR12     #6d86a7
+!! #define COLOR5      #6F4B73
+!! #define COLOR13     #A16CA6
+!! #define COLOR6      #5B708C
+!! #define COLOR14     #9DC2F2
 
 Xft.dpi:       96
 Xft.antialias: true
@@ -99,3 +99,9 @@ URxvt.keysym.Control-Up:          \033[1;5A
 URxvt.keysym.Shift-Control-Up:    \033[1;6A
 URxvt.keysym.Control-Down:        \033[1;5B
 URxvt.keysym.Shift-Control-Down:  \033[1;6B
+
+! Rofi
+rofi.color-window: COLOR0, COLOR0, COLOR0
+rofi.color-normal: COLOR0, COLOR7, COLOR0, COLOR0, COLOR1
+rofi.color-active: COLOR0, COLOR7, COLOR0, COLOR0, COLOR1
+rofi.color-urgent: COLOR0, COLOR7, COLOR0, COLOR0, COLOR1
