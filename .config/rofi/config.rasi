@@ -1,9 +1,9 @@
 configuration {
-modi: "ssh";
+modi: "ssh#docs:~/.config/rofi/docs_loader.sh";
 width: 45;
 lines: 8;
 columns: 1;
-font: "Iosevka 18";
+font: "Iosevka 16";
 /*	bw: 1;*/
 /*	location: 0;*/
 padding: 5;

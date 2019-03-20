@@ -101,11 +101,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Please confirm exit' -b 'Exit i3' 'i3-msg exit'"
 
-##  Scrot (screenshot utility) and open in Gimp
-bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
-#   scrot & gimp - select window or rectangle
-bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
-
 ##  Resize window
 bindsym $mod+r mode "resize"
 mode "resize" {
@@ -125,6 +120,15 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+##  Scrot (screenshot utility) and open in Gimp
+bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+#   scrot & gimp - select window or rectangle
+bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+
+##  Flashfocus
+#   flash active window
+bindsym $mod+< exec --no-startup-id flash_window
 
 
 ##  Appearance
@@ -186,12 +190,18 @@ assign [class="Thunderbird"] $workspace7
 
 ##  Execution
 ##  ------------------------------
-##  - Execute on login
+##  - Execute on startup
+##
 exec --no-startup-id compton --config /home/deo/.config/compton/compton.conf -b
-# exec --no-startup-id redshift-gtk
+##  User authentication agent for polkit
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
+##  Udiskie 
+##  An udisks2 front-end to manage removeable media from userspace
+exec --no-startup-id udiskie --tray --use-udisks2
 exec ibus-daemon -r
 exec dropbox
 exec thunderbird
+# exec --no-startup-id redshift-gtk
 exec slack
 
 ##  - Execute on reload
