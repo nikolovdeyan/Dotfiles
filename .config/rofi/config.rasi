@@ -1,5 +1,6 @@
 configuration {
-modi: "ssh#docs:~/.config/rofi/docs_loader.sh";
+modi: "ssh";
+/*  modi: "ssh#docs:~/.config/rofi/docs_loader.sh";*/
 width: 45;
 lines: 8;
 columns: 1;
@@ -51,6 +52,7 @@ sidebar-mode: true;
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
 /*	theme: ;*/
+theme: "~/.cache/wal/colors-rofi-dark.rasi";
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/

@@ -137,23 +137,23 @@ bindsym $mod+< exec --no-startup-id flash_window
 ##  Disable edge borders and indicator
 #hide_edge_borders both
 
-##  Get colors from .Xresources
-#set_from_resource $background_dark = color0
-#set_from_resource $background_light = color8
-#set_from_resource $foreground_dark = color7
-#set_from_resource $foreground_light = color15
-#set_from_resource $red_dark = color1
-#set_from_resource $red_light = color9
-#set_from_resource $green_dark = color2
-#set_from_resource $green_light = color10
-#set_from_resource $yellow_dark = color3
-#set_from_resource $yellow_light = color11
-#set_from_resource $blue_dark = color4
-#set_from_resource $blue_light = color12
-#set_from_resource $magenta_dark = color5
-#set_from_resource $magenta_light = color13
-#set_from_resource $cyan_dark = color6
-#set_from_resource $cyan_light = color14
+# Set colors from Xresources
+# Change 'color7' and 'color2' to whatever colors you want i3 to use 
+# from the generated scheme.
+# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
+# it fails to get colors from Xresources.
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+##  Window appearance
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+client.background       $bg
 
 ##  Assign colors to color variables
 #set $bg_focused $background_dark
@@ -163,24 +163,15 @@ bindsym $mod+< exec --no-startup-id flash_window
 #set $fg_focused $foreground_light
 #set $fg_unfocused $foreground_light
 #set $fg_urgent $red_light
-
-##  Window appearance
-##  Element               Border                  Background              Text                    Indicator
-#client.focused            $bg_focused             $bg_focused             $fg_focused             #00ff00
-#client.unfocused          $bg_unfocused           $bg_unfocused           $fg_unfocused           #00ff00
-#client.focused_inactive   $bg_inactive            $bg_inactive            $fg_unfocused           #00ff00
-#client.urgent             $bg_urgent              $bg_urgent              $fg_urgent              #00ff00
-
-
+#
 ##  Rofi Configuration (a program launcher)
 ##  ------------------------------
-bindsym $mod+z exec rofi -show drun -theme .config/rofi/current-theme .
-bindsym $mod+s exec rofi -show ssh -theme .config/rofi/current-theme .
+bindsym $mod+z exec rofi -show drun .
+bindsym $mod+s exec rofi -show ssh .
 
 ##  i3lock Configuration (a screen locker)
 ##  ------------------------------
 #  bindsym $mod+Shift+x exec i3lock --color "$bg_unfocused"
-
 
 ##  Assign workspace applications
 ##  ---------------------------
@@ -189,14 +180,14 @@ assign [class="Slack"] $workspace8
 assign [class="Thunderbird"] $workspace7
 
 ##  Execution
-##  ------------------------------
+##  ==========================
 ##  - Execute on startup
+##  ---------------------------
 ##
 exec --no-startup-id compton --config /home/deo/.config/compton/compton.conf -b
 ##  User authentication agent for polkit
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
-##  Udiskie 
-##  An udisks2 front-end to manage removeable media from userspace
+##  Udiskie -- An udisks2 front-end to manage removeable media from userspace
 exec --no-startup-id udiskie --tray --use-udisks2
 exec ibus-daemon -r
 exec dropbox
@@ -205,6 +196,8 @@ exec thunderbird
 exec slack
 
 ##  - Execute on reload
+##  ---------------------------
+## 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id flashfocus
 exec_always nitrogen --restore &
