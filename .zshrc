@@ -1,9 +1,18 @@
+# Using a custom wallpaper setter for pywal. 
+# See more: https://github.com/dylanaraps/pywal/wiki/Getting-Started#using-a-custom-wallpaper-setter
+wal-tile() {
+  wal -n -i "$@"
+  wal_steam -w
+  # nitrogen --set-auto "$(< "${HOME}/.cache/wal/wal")"
+  feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
+}
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="${PATH}:${HOME}/.local/bin/"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/deo/.oh-my-zsh"
-export PATH="${PATH}:${HOME}/.local/bin/"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -68,7 +77,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# USER CONFIGURATION
 
 # export MANPATH="/usr/local/man:$MANPATH"
 export BROWSER="/usr/bin/firefox"
@@ -77,11 +86,11 @@ export BROWSER="/usr/bin/firefox"
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='emacs'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
