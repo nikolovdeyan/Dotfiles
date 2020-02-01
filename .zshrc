@@ -1,11 +1,13 @@
-# Using a custom wallpaper setter for pywal. 
+# Using a custom wallpaper setter for pywal.
 # See more: https://github.com/dylanaraps/pywal/wiki/Getting-Started#using-a-custom-wallpaper-setter
 wal-tile() {
   wal -n -i "$@"
-  wal_steam -w
-  # nitrogen --set-auto "$(< "${HOME}/.cache/wal/wal")"
+  # wal_steam -w
+  nitrogen --set-auto "$(< "${HOME}/.cache/wal/wal")"
   feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
 }
+
+(cat ~/.cache/wal/sequences &)
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH

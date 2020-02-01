@@ -180,16 +180,18 @@ assign [class="Thunderbird"] $workspace7
 ##  - Execute on startup
 ##  ---------------------------
 ##
+## Restore the last colorscheme used by wal.
+exec wal -R
 exec --no-startup-id compton --config /home/deo/.config/compton/compton.conf -b
 ##  User authentication agent for polkit
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 ##  Udiskie -- An udisks2 front-end to manage removeable media from userspace
-exec --no-startup-id udiskie --tray --use-udisks2
-exec ibus-daemon -r
-# exec dropbox
-# exec thunderbird
+exec --no-startup-id udiskie --tray --notify
+# exec ibus-daemon -r
+exec dropbox
+exec thunderbird
 # exec --no-startup-id redshift-gtk
-# exec slack
+exec slack
 
 ##  - Execute on reload
 ##  ---------------------------
