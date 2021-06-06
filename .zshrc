@@ -2,7 +2,6 @@
 # See more: https://github.com/dylanaraps/pywal/wiki/Getting-Started#using-a-custom-wallpaper-setter
 wal-tile() {
   wal -n -i "$@"
-  # wal_steam -w
   nitrogen --set-auto "$(< "${HOME}/.cache/wal/wal")"
   feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
 }
@@ -91,7 +90,9 @@ export BROWSER="/usr/bin/firefox"
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='emacs'
+  export EDITOR='emacsclient -t'
+  export VISUAL='emacsclient -c'
+  alias sm="emacsclient -c" # open file in a new X-Window
 fi
 
 # Compilation flags
@@ -100,11 +101,11 @@ fi
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+export PIPENV_VENV_IN_PROJECT=1

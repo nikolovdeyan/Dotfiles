@@ -1,14 +1,13 @@
 configuration {
-modi: "ssh";
-/*  modi: "ssh#docs:~/.config/rofi/docs_loader.sh";*/
-width: 45;
+modi: "ssh,file-browser-extended";
+width: 35;
 lines: 6;
 columns: 1;
-font: "Iosevka 16";
+font: "Iosevka 14";
 /*	bw: 1;*/
 location: 2;
 padding: 5;
-yoffset: 28;
+yoffset: 30;
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
 show-icons: true;

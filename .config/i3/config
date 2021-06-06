@@ -84,16 +84,16 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 
 ##  Assign workspace output
 ##  ---------------------------
-workspace $workspace1 output HDMI-0
-workspace $workspace2 output HDMI-0
-workspace $workspace3 output HDMI-0
-workspace $workspace4 output HDMI-0
-workspace $workspace5 output HDMI-0
-workspace $workspace6 output DVI-0
-workspace $workspace7 output DVI-0
-workspace $workspace8 output DVI-0
-workspace $workspace9 output DVI-0
-workspace $workspace10 output DVI-0
+workspace $workspace1 output HDMI-A-0
+workspace $workspace2 output HDMI-A-0
+workspace $workspace3 output HDMI-A-0
+workspace $workspace4 output HDMI-A-0
+workspace $workspace5 output HDMI-A-0
+workspace $workspace6 output DVI-I-1
+workspace $workspace7 output DVI-I-1
+workspace $workspace8 output DVI-I-1
+workspace $workspace9 output DVI-I-1
+workspace $workspace10 output DVI-I-1
 
 ##  Reload/Restart inplace/Exit
 ##  ---------------------------
@@ -131,7 +131,10 @@ bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 ##  ------------------------------
 
 ##  Disable edge borders and indicator
-#hide_edge_borders both
+# hide_edge_borders horizontal
+
+##  Disable window titlebars (this is needed if using i3-gaps)
+for_window [class="^.*"] border pixel 2
 
 # Set colors from Xresources
 # Change 'color7' and 'color2' to whatever colors you want i3 to use 
@@ -139,31 +142,25 @@ bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 # NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
 # it fails to get colors from Xresources.
 set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
+set_from_resource $bg i3wm.color0 #f0f0f0
+set_from_resource $ac i3wm.color1 #f0f0f0
 
 ##  Window appearance
 # class                 border  backgr. text indicator child_border
-client.focused          $bg     $bg     $fg  $bg       $bg
-client.focused_inactive $bg     $bg     $fg  $bg       $bg
-client.unfocused        $bg     $bg     $fg  $bg       $bg
-client.urgent           $bg     $bg     $fg  $bg       $bg
-client.placeholder      $bg     $bg     $fg  $bg       $bg
-
+client.focused          $ac     $bg     $fg  $bg       $ac
+client.focused_inactive $ac     $bg     $fg  $bg       $ac
+client.unfocused        $ac     $bg     $fg  $bg       $ac
+client.urgent           $ac     $bg     $fg  $bg       $ac
+client.placeholder      $ac     $bg     $fg  $bg       $ac
 client.background       $bg
 
-##  Assign colors to color variables
-#set $bg_focused $background_dark
-#set $bg_unfocused $background_light
-#set $bg_inactive $red_dark
-#set $bg_urgent $red_light
-#set $fg_focused $foreground_light
-#set $fg_unfocused $foreground_light
-#set $fg_urgent $red_light
-#
+
 ##  Rofi Configuration (a program launcher)
 ##  ------------------------------
 bindsym $mod+z exec rofi -show drun .
 bindsym $mod+s exec rofi -show ssh .
+bindsym $mod+d exec rofi -show file-browser-extended
+#bindsym $mod+o exec rofi -show file-browser-extended
 
 ##  i3lock Configuration (a screen locker)
 ##  ------------------------------
@@ -173,13 +170,16 @@ bindsym $mod+s exec rofi -show ssh .
 ##  ---------------------------
 ##  - Use xprop to get the i3 window class
 assign [class="Slack"] $workspace8
-assign [class="Thunderbird"] $workspace7
 
 ##  Execution
 ##  ==========================
-##  - Execute on startup
-##  ---------------------------
 ##
+## Start Polybar
+exec_always $HOME/.config/polybar/launch.sh
+
+## Setup keyboard layouts
+exec "setxkbmap -model pc105 -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle"
+
 ## Restore the last colorscheme used by wal.
 exec wal -R
 exec --no-startup-id compton --config /home/deo/.config/compton/compton.conf -b
@@ -187,17 +187,7 @@ exec --no-startup-id compton --config /home/deo/.config/compton/compton.conf -b
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 ##  Udiskie -- An udisks2 front-end to manage removeable media from userspace
 exec --no-startup-id udiskie --tray --notify
-# exec ibus-daemon -r
 exec dropbox
-exec thunderbird
-# exec --no-startup-id redshift-gtk
 exec slack
 
-##  - Execute on reload
-##  ---------------------------
-## 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always nitrogen --restore &
-
-##  Disable window titlebars (this is needed if using i3-gaps)
-for_window [class="^.*"] border pixel 0

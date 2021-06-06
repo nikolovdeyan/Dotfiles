@@ -7,25 +7,6 @@ screenchange-reload = true
 
 ;; COLORS DEFINITION
 [colors]
-;;background_dark = ${xrdb:color0}
-;;background_light = ${xrdb:color8}
-;;foreground_dark = ${xrdb:color7}
-;;foreground_light = ${xrdb:color15}
-;;red_dark = ${xrdb:color1}
-;;red_light = ${xrdb:color9}
-;;green_dark = ${xrdb:color2}
-;;green_light = ${xrdb:color10}
-;;yellow_dark = ${xrdb:color3}
-;;yellow_light = ${xrdb:color11}
-;;blue_dark = ${xrdb:color4}
-;;blue_light = ${xrdb:color12}
-;;magenta_dark = ${xrdb:color5}
-;;magenta_light = ${xrdb:color13}
-;;cyan_dark = ${xrdb:color6}
-;;cyan_light = ${xrdb:color14}
-;;;; additional colors
-;;;; accent_dark = ${colors.blue_dark}
-;;;; accent_light = ${colors.blue_light}
 background = ${xrdb:color0}
 foreground = ${xrdb:color7}
 foreground-alt = ${xrdb:color7}
@@ -36,29 +17,35 @@ alert = ${xrdb:color3}
 ;; BASE BAR
 ;; Settings are inherited by all other bars
 [bar/base]
+dpi = 192
 width = 100%
-height = 28
+height = 25
 module-margin = 0
+background = ${colors.background}
+foreground = ${colors.foreground}
 offset-x = 0
 offset-y = 0
 radius-top = 0
 radius-bottom = 0
-background = ${colors.background}
-foreground = ${colors.foreground}
 line-size = 0
 line-color = ${colors.primary}
 ;; overline-size = 0
 ;; overline-color = ${colors.primary}
 ;; underline-size = 0
 ;; underline-color = ${colors.primary}
-border-top-size = 0
-border-bottom-size = 0
-border-color = ${colors.background}
+border-top-size = 5
+border-bottom-size = 5
+border-left-size = 5
+border-right-size = 5
+border-top-color = ${colors.background}
+border-bottom-color = ${colors.background}
+border-left-color = ${colors.background}
+border-right-color = ${colors.background}
 
-font-0 = FantasqueSansMono:pixelsize=11;1
-font-1 = IosevkaSemibold:size=11;0
-font-2 = IosevkaMedium:size=10;1
-font-3 = IosevkaHeavy:size=11;1
+font-0 = FantasqueSansMono:pixelsize=8;1
+font-1 = IosevkaSemibold:size=6;3
+font-2 = IosevkaMedium:size=6;3
+font-3 = IosevkaHeavy:size=6;3
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -67,7 +54,7 @@ cursor-scroll = ns-resize
 ;; Compose the main bar for the primary monitor
 [bar/mainbar]
 inherit = bar/base
-monitor = ${env:MONITOR:HDMI-0}
+monitor = ${env:MONITOR:HDMI-A-0}
 
 modules-left = i3
 modules-center = date
@@ -93,7 +80,7 @@ tray-background = ${colors.background}
 ;; Compose the auxiliary bar for the secondary monitor
 [bar/auxbar]
 inherit = bar/base
-monitor = ${env:MONITOR:DVI-0}
+monitor = ${env:MONITOR:DVI-I-1}
 
 modules-left = i3
 modules-center = date
@@ -117,7 +104,7 @@ wrapping-scroll = false
 ; Only show workspaces on the same output device as the bar
 pin-workspaces = true
 
-label-mode-padding = 2
+label-mode-padding = 1
 label-mode-background = ${colors.background}
 label-mode-foreground = ${colors.foreground}
 
@@ -126,12 +113,12 @@ label-focused = %index%
 label-focused-font = 2
 label-focused-background = ${colors.primary}
 label-focused-underline = ${colors.background}
-label-focused-padding = 2
+label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-font = 2
-label-unfocused-padding = 2
+label-unfocused-padding = 1
 label-unfocused-underline = ${colors.foreground}
 
 ; visible = Active workspace on unfocused monitor
@@ -145,7 +132,7 @@ label-visible-padding = ${self.label-focused-padding}
 label-urgent = %index%
 label-urgent-font = 2
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 
 [module/filesystem]
