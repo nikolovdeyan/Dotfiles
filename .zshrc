@@ -1,12 +1,17 @@
-# Using a custom wallpaper setter for pywal.
-# See more: https://github.com/dylanaraps/pywal/wiki/Getting-Started#using-a-custom-wallpaper-setter
+##  Using a custom wallpaper setter for pywal.
+##  See more: https://github.com/dylanaraps/pywal/wiki/Getting-Started#using-a-custom-wallpaper-setter
 wal-tile() {
   wal -n -i "$@"
   nitrogen --set-auto "$(< "${HOME}/.cache/wal/wal")"
-  feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
+}
+
+wal-tile-light() {
+    wal -l -i "$@"
+    nitrogen --set-auto "$(< "${HOME}/.cache/wal/wal")"
 }
 
 (cat ~/.cache/wal/sequences &)
+
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -100,9 +105,6 @@ fi
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"

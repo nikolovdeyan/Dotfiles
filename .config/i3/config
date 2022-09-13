@@ -1,3 +1,6 @@
+##  i3 Configuration
+
+
 ##  Font Configuration
 ##  ------------------------------
 font pango:Iosevka Medium 8
@@ -15,29 +18,7 @@ floating_modifier $mod
 ##  Start a terminal
 bindsym $mod+Return exec konsole
 
-##  Kill the focused window
 bindsym $mod+Shift+q kill
-
-##  Change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-##  Move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
 bindsym $mod+n split h
 bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
@@ -48,7 +29,23 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
-##  Set workspace variables
+
+##  ---------------------------
+##  Change focus
+##  ---------------------------
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+
+##  ---------------------------
+##  Assign workspace variables
+##  ---------------------------
 set $workspace1 "1"
 set $workspace2 "2"
 set $workspace3 "3"
@@ -60,6 +57,24 @@ set $workspace8 "8"
 set $workspace9 "9"
 set $workspace10 "10"
 
+
+##  ---------------------------
+##  Assign workspaces to monitors
+##  ---------------------------
+#workspace $workspace1 output HDMI-0
+#workspace $workspace2 output HDMI-0
+#workspace $workspace3 output HDMI-0
+#workspace $workspace4 output HDMI-0
+#workspace $workspace5 output HDMI-0
+#workspace $workspace6 output DVI-D-0
+#workspace $workspace7 output DVI-D-0
+#workspace $workspace8 output DVI-D-0
+#workspace $workspace9 output DVI-D-0
+#workspace $workspace10 output DVI-D-0
+
+##  ---------------------------
+##  Switch to workspace
+##  ---------------------------
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
@@ -71,6 +86,45 @@ bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
 
+##  Switch to workspace (numpad)
+bindcode $mod+87 workspace $workspace1
+bindcode $mod+88 workspace $workspace2
+bindcode $mod+89 workspace $workspace3
+bindcode $mod+83 workspace $workspace4
+bindcode $mod+84 workspace $workspace5
+bindcode $mod+85 workspace $workspace6
+bindcode $mod+79 workspace $workspace7
+bindcode $mod+80 workspace $workspace8
+bindcode $mod+81 workspace $workspace9
+bindcode $mod+90 workspace $workspace10
+
+##  Switch to workspace (numlock numpad)
+bindcode $mod+mod2+87 workspace $workspace1
+bindcode $mod+mod2+88 workspace $workspace2
+bindcode $mod+mod2+89 workspace $workspace3
+bindcode $mod+mod2+83 workspace $workspace4
+bindcode $mod+mod2+84 workspace $workspace5
+bindcode $mod+mod2+85 workspace $workspace6
+bindcode $mod+mod2+79 workspace $workspace7
+bindcode $mod+mod2+80 workspace $workspace8
+bindcode $mod+mod2+81 workspace $workspace9
+bindcode $mod+mod2+90 workspace $workspace10
+
+
+##  ---------------------------
+##  Move container
+##  ---------------------------
+##  Move container left/right/up/down
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+##  Move container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
@@ -82,26 +136,44 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
-##  Assign workspace output
-##  ---------------------------
-workspace $workspace1 output HDMI-A-0
-workspace $workspace2 output HDMI-A-0
-workspace $workspace3 output HDMI-A-0
-workspace $workspace4 output HDMI-A-0
-workspace $workspace5 output HDMI-A-0
-workspace $workspace6 output DVI-I-1
-workspace $workspace7 output DVI-I-1
-workspace $workspace8 output DVI-I-1
-workspace $workspace9 output DVI-I-1
-workspace $workspace10 output DVI-I-1
+##  Move container to workspace (numpad)
+bindcode $mod+Shift+87 move container to workspace $workspace1
+bindcode $mod+Shift+88 move container to workspace $workspace2
+bindcode $mod+Shift+89 move container to workspace $workspace3
+bindcode $mod+Shift+83 move container to workspace $workspace4
+bindcode $mod+Shift+84 move container to workspace $workspace5
+bindcode $mod+Shift+85 move container to workspace $workspace6
+bindcode $mod+Shift+79 move container to workspace $workspace7
+bindcode $mod+Shift+80 move container to workspace $workspace8
+bindcode $mod+Shift+81 move container to workspace $workspace9
+bindcode $mod+Shift+90 move container to workspace $workspace10
 
-##  Reload/Restart inplace/Exit
+##  Move container to workspace (numlock numpad)
+bindcode $mod+Shift+Mod2+87 move container to workspace $workspace1
+bindcode $mod+Shift+Mod2+88 move container to workspace $workspace2
+bindcode $mod+Shift+Mod2+89 move container to workspace $workspace3
+bindcode $mod+Shift+Mod2+83 move container to workspace $workspace4
+bindcode $mod+Shift+Mod2+84 move container to workspace $workspace5
+bindcode $mod+Shift+Mod2+85 move container to workspace $workspace6
+bindcode $mod+Shift+Mod2+79 move container to workspace $workspace7
+bindcode $mod+Shift+Mod2+80 move container to workspace $workspace8
+bindcode $mod+Shift+Mod2+81 move container to workspace $workspace9
+bindcode $mod+Shift+Mod2+90 move container to workspace $workspace10
+
+
+##  Reload/Restart/Exit i3
 ##  ---------------------------
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Please confirm exit' -b 'Exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Confirm' 'i3-msg exit'"
+
+## App shortcuts
+# bindsym $mod+Shift+b exec /usr/bin/firefox
+# bindsym $mod+Shift+f exec /usr/bin/thunar
+
 
 ##  Resize window
+##  ---------------------------
 bindsym $mod+r mode "resize"
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -121,20 +193,43 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-##  Scrot (screenshot utility) and open in Gimp
-bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
-#   scrot & gimp - select window or rectangle
-bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+##  Screenshot capture
+# select region using the gui
+bindsym Print exec flameshot gui -p /home/deo/Pictures
+# capture active screen
+bindsym $mod+Print exec flameshot screen -p /home/deo/Pictures
 
-
-##  Appearance
+##  Rofi shortcuts
 ##  ------------------------------
+bindsym $mod+z exec rofi -show drun .
+bindsym $mod+s exec rofi -show ssh .
+bindsym $mod+d exec rofi -show file-browser-extended
+
+##  Toggle second polybar visibility
+bindsym $mod+F5 exec --no-startup-id "$HOME/.config/polybar/scripts/toggle_helper_bar.sh"
+
+
+##  ==========================
+##  Appearance
+##  ==========================
 
 ##  Disable edge borders and indicator
-# hide_edge_borders horizontal
+# hide_edge_borders none|vertical|horizontal|both|smart
+hide_edge_borders none
 
-##  Disable window titlebars (this is needed if using i3-gaps)
-for_window [class="^.*"] border pixel 2
+##  Window borders
+new_window pixel 3
+# for_window [class="^.*"] border pixel 3
+for_window [class="Guake"] border pixel 1
+
+##  Enable gaps
+# gaps [inner|outer|horizontal|vertical|top|left|bottom|right] <px>
+# workspace <ws> gaps [inner|outer|horizontal|vertical|top|left|bottom|right] <px>
+gaps inner 10
+gaps outer 8
+
+# Only enable outer gaps when there is exactly one container
+# smart_gaps no_gaps
 
 # Set colors from Xresources
 # Change 'color7' and 'color2' to whatever colors you want i3 to use 
@@ -143,51 +238,79 @@ for_window [class="^.*"] border pixel 2
 # it fails to get colors from Xresources.
 set_from_resource $fg i3wm.color7 #f0f0f0
 set_from_resource $bg i3wm.color0 #f0f0f0
-set_from_resource $ac i3wm.color1 #f0f0f0
+set_from_resource $acc1 i3wm.color3 #f0f0f0
+set_from_resource $acc2 i3wm.color4 #f0f0f0
+set_from_resource $err i3wm.color1 #ff0000
+set_from_resource $gray #555555 #f0f0f0
 
 ##  Window appearance
-# class                 border  backgr. text indicator child_border
-client.focused          $ac     $bg     $fg  $bg       $ac
-client.focused_inactive $ac     $bg     $fg  $bg       $ac
-client.unfocused        $ac     $bg     $fg  $bg       $ac
-client.urgent           $ac     $bg     $fg  $bg       $ac
-client.placeholder      $ac     $bg     $fg  $bg       $ac
+##  ------------------------------
+# class                 border    backgr. text indicator child_border
+client.focused          $acc1     $bg     $fg  $bg       $acc1
+client.focused_inactive $acc1     $bg     $fg  $bg       $bg
+client.unfocused        $bg       $bg     $fg  $bg       $bg
+client.urgent           $err      $bg     $fg  $bg       $err
+client.placeholder      $bg       $bg     $fg  $bg       $bg
 client.background       $bg
 
 
-##  Rofi Configuration (a program launcher)
-##  ------------------------------
-bindsym $mod+z exec rofi -show drun .
-bindsym $mod+s exec rofi -show ssh .
-bindsym $mod+d exec rofi -show file-browser-extended
-#bindsym $mod+o exec rofi -show file-browser-extended
-
-##  i3lock Configuration (a screen locker)
-##  ------------------------------
+##  i3lock (a screen locker)
 #  bindsym $mod+Shift+x exec i3lock --color "$bg_unfocused"
 
-##  Assign workspace applications
-##  ---------------------------
-##  - Use xprop to get the i3 window class
-assign [class="Slack"] $workspace8
 
-##  Execution
+##  ==========================
+##  Assign applications to workspaces
+##  ==========================
+##  - Use `xprop` to get the i3 window class
+assign [class="Slack"] $workspace10
+assign [class="Signal"] $workspace10
+
+
+##  ==========================
+##  Start applications
 ##  ==========================
 ##
-## Start Polybar
-exec_always $HOME/.config/polybar/launch.sh
+##  Polybar
+# exec_always --no-startup-id $HOME/.config/polybar/basic/launch.sh
+exec_always --no-startup-id /home/deo/.config/polybar/experimental/launch.sh
 
-## Setup keyboard layouts
-exec "setxkbmap -model pc105 -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle"
+##  Switch keyboard layouts
+exec --no-startup-id "setxkbmap -model pc105 -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle"
 
-## Restore the last colorscheme used by wal.
-exec wal -R
-exec --no-startup-id compton --config /home/deo/.config/compton/compton.conf -b
+##  Notifications
+exec_always --no-startup-id /usr/bin/dunst -conf "$HOME/.config/dunst/dunstrc"
+
+##  Guake terminal
+exec --no-startup-id guake
+
 ##  User authentication agent for polkit
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
+
+##  Power manager
+exec --no-startup-id xfce4-power-manager
+
+##  KDE Connect
+exec --no-startup-id kdeconnect-indicator
+
+##  Restore the last colorscheme used by wal.
+exec_always --no-startup-id wal -R
+
 ##  Udiskie -- An udisks2 front-end to manage removeable media from userspace
 exec --no-startup-id udiskie --tray --notify
-exec dropbox
-exec slack
 
-exec_always nitrogen --restore &
+##  Signal
+exec --no-startup-id signal-desktop
+
+##  Dropbox
+# Disabled atm. See: https://wiki.archlinux.org/title/Dropbox
+# exec --no-startup-id dropbox
+
+##  Transparency, blurring, shadows
+exec_always --no-startup-id picom --config "$HOME/.config/picom/picom.conf"
+
+
+##  ==========================
+##  Enable floating of selected applications
+##  ==========================
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
