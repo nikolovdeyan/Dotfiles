@@ -40,7 +40,7 @@ get_icon() {
     echo $icon
 }
 
-KEY="37863b95b89c9813d2277d009f143098"
+KEY="0123456"
 CITY="Sofia,BG"
 UNITS="metric"
 SYMBOL="°"
