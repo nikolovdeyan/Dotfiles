@@ -1,17 +1,29 @@
 ##  Using a custom wallpaper setter for pywal.
 ##  See more: https://github.com/dylanaraps/pywal/wiki/Getting-Started#using-a-custom-wallpaper-setter
 wal-tile() {
-  wal -n -i "$@"
-  nitrogen --set-auto "$(< "${HOME}/.cache/wal/wal")"
+    wal -n -i "$@"
+    nitrogen --set-zoom-fill "$(< "${HOME}/.cache/wal/wal")"
 }
 
 wal-tile-light() {
     wal -l -i "$@"
-    nitrogen --set-auto "$(< "${HOME}/.cache/wal/wal")"
+    nitrogen --set-zoom-fill "$(< "${HOME}/.cache/wal/wal")"
+}
+
+## Qtile: added line to reload qtile config when changing themes
+wal-qtile() {
+    wal -n -i "$@"
+    nitrogen --set-zoom-fill "$(< "${HOME}/.cache/wal/wal")"
+    qtile cmd-obj -o cmd -f reload_config
+}
+
+wal-tile-light() {
+    wal -l -i "$@"
+    nitrogen --set-zoom-fill "$(< "${HOME}/.cache/wal/wal")"
+    qtile cmd-obj -o cmd -f reload_config
 }
 
 (cat ~/.cache/wal/sequences &)
-
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH

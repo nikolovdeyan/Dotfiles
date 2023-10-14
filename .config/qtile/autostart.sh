@@ -25,7 +25,6 @@ run /usr/lib/polkit-kde-authentication-agent-1
 run setxkbmap -model pc105 -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle
 
 run xset b off 				      # Disable beep
-run nitrogen --restore 	    # Wallpaper
 run xfce4-power-manager     # Power manager
 run udiskie --tray --notify # Front-end to manage removable media from userspace
 
@@ -35,16 +34,19 @@ run /usr/bin/dunst -conf "$HOME/.config/dunst/dunstrc"
 # Drop-down terminal
 run guake
 
-# Restore the last colorscheme used by wal
-run wal -R
-
-# Signal messaging
-run signal-desktop
 
 # Transparency, blurring, shadows
 run picom --config "$HOME/.config/picom/picom.conf"
-run compton							# Compositor
 
+run wal -n -i
+run nitrogen --set-zoom-fill "$(< "${HOME}/.cache/wal/wal")"
+run qtile cmd-obj -o cmd -f reload_config
+
+run signal-desktop
+run qbittorrent
+run steam
+run firefox
+run flameshot
 # Some process you may want to start with Qtile
 # run urxvtd -q -o					# URxvt daemon
 # run cbatticon						# Battery icon and command

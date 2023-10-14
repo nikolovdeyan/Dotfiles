@@ -1,6 +1,6 @@
 configuration {
 modi: "drun,ssh,file-browser-extended";
-font: "Iosevka Regular 15";
+font: "Iosevka Medium 12";
 location: 2;
 yoffset: 0;
 show-icons: true;
@@ -24,14 +24,14 @@ kb-row-down: "Down,Control+j";
 }
 
 #window {
-  width: 640px;     
-  height: 480px;
+  width: 440px;
+  height: 380px;
   border-radius: 2px;
-  padding: 14px 14px 14px 22px;
+  padding: 8px 8px 8px 8px;
 }
 
 #inputbar {
-  padding: 6px 0 20px 0;
+  padding: 6px 0 14px 0;
 }
 
 
@@ -64,7 +64,7 @@ kb-row-down: "Down,Control+j";
 }
 
 #button {
-  font: "Iosevka Bold 12";
+  font: "Iosevka Medium 8";
 }
 
 #button selected {

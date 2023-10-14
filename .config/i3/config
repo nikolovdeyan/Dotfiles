@@ -221,6 +221,8 @@ hide_edge_borders none
 new_window pixel 3
 # for_window [class="^.*"] border pixel 3
 for_window [class="Guake"] border pixel 1
+# temp fix for https://github.com/i3/i3/issues/5149
+for_window [all] border pixel 3
 
 ##  Enable gaps
 # gaps [inner|outer|horizontal|vertical|top|left|bottom|right] <px>
@@ -264,7 +266,8 @@ client.background       $bg
 ##  - Use `xprop` to get the i3 window class
 assign [class="Slack"] $workspace10
 assign [class="Signal"] $workspace10
-
+assign [class="Steam"] $workspace9
+assign [class="KeePassXC"] $workspace8
 
 ##  ==========================
 ##  Start applications
@@ -303,7 +306,7 @@ exec --no-startup-id signal-desktop
 
 ##  Dropbox
 # Disabled atm. See: https://wiki.archlinux.org/title/Dropbox
-# exec --no-startup-id dropbox
+exec --no-startup-id dropbox
 
 ##  Transparency, blurring, shadows
 exec_always --no-startup-id picom --config "$HOME/.config/picom/picom.conf"
